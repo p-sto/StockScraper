@@ -1,6 +1,7 @@
 """Main script file"""
 
 import os
+from pathlib import Path
 
 from StockScraper.Generic.Configuration import get_data_from_config
 from StockScraper.Generic.Clients import get_client
@@ -11,9 +12,9 @@ def main():
 
     :return: None
     """
-    path_to_config = os.path.abspath(__file__) + '/../Configs/config.json'
-    path_to_config = os.path.abspath(path_to_config)
-    config = get_data_from_config(path_to_config)
+    path_to_config = Path(os.path.dirname(os.path.abspath(__file__)))
+    path_to_config = path_to_config / 'Configs' / 'config.json'
+    config = get_data_from_config(str(path_to_config))
 
     for host in config:
         print('Loading data for host {}'.format(host))

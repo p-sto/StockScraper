@@ -41,7 +41,6 @@ class Date:
                 return date.replace(tzinfo=pytz.utc)
         raise TypeError('Provided object is not instance of datetime.')
 
-
     @classmethod
     def datetime_to_epoch(cls, date):
         """Convert date to unix epoch format
