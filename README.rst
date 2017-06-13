@@ -7,15 +7,12 @@ Preparation
 -----------
 
 ::
+
     $ git clone
-
     $ cd StockScraper
-
     $ make venv
-
     $ source venv/bin/activate
-
-    $ export PYTHONPATH=$path_to_project
+    $ export PYTHONPATH=$PWD
 
 
 Usage
