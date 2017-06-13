@@ -5,7 +5,7 @@ PYTHONPATH=$(PWD)
 PIP=venv/bin/pip3
 PIP_FLAGS=--trusted-host=http://pypi.python.org/simple/
 
-.PHONY: venv clean test path
+.PHONY: all venv clean test
 
 all: venv test clean
 
@@ -17,5 +17,10 @@ venv/bin/activate: requirements.txt
 	touch venv/bin/activate
 
 test:
+	py.test --cov=StockScraper --cov-report html --cov-config .coveragerc --tb=short tests/
+	coverage report
 
 clean:
+	rm -rf htmlcov
+	rm -rf */__pycache__
+	rm -rf */*/__pycache__

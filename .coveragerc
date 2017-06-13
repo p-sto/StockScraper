@@ -1,0 +1,15 @@
+[run]
+branch = True
+
+source = TerminalUtils
+
+[report]
+exclude_lines =
+      if __name__ == .__main__.:
+      pass
+ignore_errors = False
+omit =
+      */docs/*
+      */tests/*
+      */StockScrapper/__init__.py
+show_missing = True
