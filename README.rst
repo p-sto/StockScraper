@@ -20,7 +20,6 @@ Usage
 
 .. code:: python
 
-    from StockScraper.Generic.Configuration import get_data_from_config
     from StockScraper.Generic.Clients import get_client
 
     client = get_client("http://www.bankier.pl")
