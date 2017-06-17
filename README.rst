@@ -1,7 +1,7 @@
 StockSraper
 ===========
 
-Scrapper for Bankier.pl.
+Scraper for Bankier.pl.
 
 Preparation
 -----------

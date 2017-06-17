@@ -17,10 +17,14 @@ venv/bin/activate: requirements.txt
 	touch venv/bin/activate
 
 test:
-	py.test --cov=StockScraper --cov-report html --cov-config .coveragerc --tb=short tests/
+	py.test -s --cov=StockScraper --cov-report html --cov-config .coveragerc --tb=short tests/
 	coverage report
 
 clean:
 	rm -rf htmlcov
 	rm -rf */__pycache__
+	rm -rf */__init__.pyc
 	rm -rf */*/__pycache__
+	rm -rf .coverage
+	rm -rf .cache
+

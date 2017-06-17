@@ -9,16 +9,16 @@ class Date:
     _1DAY = 86400000
     _datetime_zero_day_epoch = datetime(1970, 1, 1).replace(tzinfo=pytz.utc)
 
-    @classmethod
-    def get_current_time(cls):
+    @staticmethod
+    def get_current_time():
         """Return current time according to host timezone.
 
         :return: datetime object.
         """
         return datetime.now()
 
-    @classmethod
-    def get_current_time_utc(cls):
+    @staticmethod
+    def get_current_time_utc():
         """Return current time in utc datetime.
 
         :return: datetime object.
@@ -41,8 +41,8 @@ class Date:
                 return date.replace(tzinfo=pytz.utc)
         raise TypeError('Provided object is not instance of datetime.')
 
-    @classmethod
-    def datetime_to_epoch(cls, date):
+    @staticmethod
+    def datetime_to_epoch(date):
         """Convert date to unix epoch format
 
         :param date: datetime object.

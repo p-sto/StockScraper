@@ -21,7 +21,7 @@ def validate_response(called_method):
         resp = called_method(method, endpoint, *args, **kwargs)
         if resp.status_code != 200:
             err = 'HTTP Client returned status code {0} for url {1}'.format(str(resp.status_code), resp.url)
-            logging.ERROR(err)
+            logging.error(err)
             raise HTTPError(err)
         return resp
     return wrapper
@@ -48,11 +48,11 @@ class HTTPClient:
         :param kwargs: additional key-worded arguments
         :return:
         """
-        logging.INFO('Calling method {0} for endpoint {1}'.format(method, endpoint))
+        logging.info('Calling method {0} for endpoint {1}'.format(method, endpoint))
 
         if method.upper() not in REST_API_METHODS:
             err = 'Method {0} does not match REST API METHODS: {1}'.format(str(method), ','.join(REST_API_METHODS))
-            logging.ERROR(err)
+            logging.error(err)
             raise TypeError(err)
 
         req_method = getattr(requests, method.lower())
