@@ -32,5 +32,6 @@ def test_http_client(mocker):
     mocked.return_value.url = 'http://localhost'
     client = HTTPClient('http://localhost')
     assert client.call_endpoint('GET', 'test').status_code == 200
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError) as excinfo:
         client.call_endpoint('TEST', 'test')
+    excinfo.match('Method TEST does not match REST API METHODS:')

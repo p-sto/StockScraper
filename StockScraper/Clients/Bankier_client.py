@@ -3,7 +3,7 @@
 from collections import OrderedDict
 from datetime import timedelta
 
-from StockScraper.Generic.Datetime import Date
+from StockScraper.Generic.Timeoperations import TimeOperate
 from StockScraper.Generic.HTTP_client import HTTPClient
 from StockScraper.Generic.HTTP_client import JSONClient
 
@@ -38,16 +38,16 @@ class BankierClient(JSONClient, HTTPClient):
             days = 3
 
         if not date_to:
-            date_to = Date.get_current_time_utc()
+            date_to = TimeOperate.get_current_time_utc()
 
         if not date_from:
             date_from = date_to - timedelta(days=days)
 
-        utc_date_to = Date.to_utc(date_to)
-        utc_date_from = Date.to_utc(date_from)
+        utc_date_to = TimeOperate.to_utc(date_to)
+        utc_date_from = TimeOperate.to_utc(date_from)
 
-        epoch_date_to = Date.days_in_epoch(utc_date_to)
-        epoch_date_from = Date.days_in_epoch(utc_date_from)
+        epoch_date_to = TimeOperate.days_in_epoch(utc_date_to)
+        epoch_date_from = TimeOperate.days_in_epoch(utc_date_from)
         # TODO: there are some problems with weekends...
         settings = [('today', 'false'), ('intraday', 'false'),
                     ('type', 'area'), ('init', 'false'),

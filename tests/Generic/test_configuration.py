@@ -14,5 +14,6 @@ def test_get_data_from_config(fs, mocker):
     mocked = mocker.patch('json.loads')
     mocked.return_value = fake_json
     assert str(get_data_from_config('test.json')) == str(fake_json)
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError) as excinfo:
         get_data_from_config('test')
+    excinfo.match('Provided path to config does not exist.')
