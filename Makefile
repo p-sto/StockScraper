@@ -21,7 +21,7 @@ lint:
 
 
 test:
-	py.test -s --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short tests/ \
+	py.test --verbose --color=yes --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short tests/ \
 	--pylint --pylint-rcfile=.pylintrc
 	coverage report
 
