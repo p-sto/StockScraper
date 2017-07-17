@@ -1,4 +1,4 @@
-
+PROJECT_NAME=StockScraper
 PYTHON_VER=/usr/local/bin/python3.5
 PWD:=$(shell pwd)
 PYTHONPATH=$(PWD)
@@ -16,8 +16,13 @@ venv/bin/activate: requirements.txt
 	$(PIP) $(PIP_FLAGS) install -Ur requirements.txt
 	touch venv/bin/activate
 
+lint:
+	pylint --rcfile=.pylintrc $(PROJECT_NAME)/*
+
+
 test:
-	py.test -s --cov=StockScraper --cov-report html --cov-config .coveragerc --tb=short tests/
+	py.test -s --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short tests/ \
+	--pylint --pylint-rcfile=.pylintrc
 	coverage report
 
 clean:
