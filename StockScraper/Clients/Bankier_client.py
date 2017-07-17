@@ -1,7 +1,7 @@
 """ Contains implementation of Bankier.pl client."""
 
 from collections import OrderedDict
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from StockScraper.Generic.Timeoperations import TimeOperate
 from StockScraper.Generic.HTTP_client import HTTPClient
@@ -11,10 +11,10 @@ from StockScraper.Generic.HTTP_client import JSONClient
 class BankierClient(JSONClient, HTTPClient):
     """Bankier.pl client."""
 
-    def __init__(self, host_name='http://www.bankier.pl'):
+    def __init__(self, host_name: str='http://www.bankier.pl') -> None:
         super(BankierClient, self).__init__(host_name)
 
-    def call_endpoint(self, method, endpoint, *args, **kwargs):
+    def call_endpoint(self, method: str, endpoint: str, *args, **kwargs) -> dict:
         """Call method on specific endpoint.
 
         :param method: operation to be performed e.g. GET
@@ -27,11 +27,12 @@ class BankierClient(JSONClient, HTTPClient):
         return self.to_json(resp)
 
     @staticmethod
-    def create_endpoint_url(symbol=None, date_from=None, date_to=None, days=None):
+    def create_endpoint_url(symbol: str, date_from: datetime=None, date_to: datetime=None, days: int=None) -> str:
         """Create endpoint url to data from Bankier.pl.
         :param symbol: Name of symbol - name of a company
         :param date_from: datetime object
         :param date_to: datetime object
+        :param days: number of days for which should look back - int
         :return: url to the endpoint
         """
         if not days:
@@ -59,7 +60,7 @@ class BankierClient(JSONClient, HTTPClient):
         endpoint_url += '&'.join([x + '=' + settings[x] for x in settings])
         return endpoint_url
 
-    def get_data(self, symbol, date_from=None, date_to=None, days=3):
+    def get_data(self, symbol: str, date_from: datetime=None, date_to: datetime=None, days=3) -> dict:
         """Return data for Bankier.pl for specific symbol and date range.
 
         :param symbol: name of a company for which data should be downloaded

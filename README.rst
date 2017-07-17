@@ -1,5 +1,5 @@
-StockSraper
-===========
+StockScraper
+============
 
 Scraper for Bankier.pl.
 
