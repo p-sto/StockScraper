@@ -5,7 +5,7 @@ import pytest
 from datetime import datetime
 
 
-from StockScraper.Generic.Timeoperations import TimeOperate
+from StockScraper.Generic.timeoperations import TimeOperate
 
 
 def test_to_utc():

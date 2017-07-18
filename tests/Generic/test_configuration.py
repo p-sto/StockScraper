@@ -3,7 +3,7 @@
 import json
 import pytest
 
-from StockScraper.Generic.Configuration import get_data_from_config
+from StockScraper.Generic.configuration import get_data_from_config
 
 
 def test_get_data_from_config(fs, mocker):

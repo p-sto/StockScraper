@@ -1,36 +1,45 @@
 PROJECT_NAME=StockScraper
-PYTHON_VER=/usr/local/bin/python3.5
 PWD:=$(shell pwd)
 PYTHONPATH=$(PWD)
-PIP=venv/bin/pip3
+TEST_DIR=tests
+VENV=venv/bin
+PIP=$(VENV)/pip3
 PIP_FLAGS=--trusted-host=http://pypi.python.org/simple/
+PYTEST=$(VENV)/py.test
+PYLINT=$(VENV)/pylint
+COVERAGE=$(VENV)/coverage
+MYPY=$(VENV)/mypy
+HOST_PYTHON_VER=/usr/local/bin/python3.5
+VENV_PYTHOM_VER=$(VENV)/python3
 
-.PHONY: all venv clean test
+.PHONY: all venv clean test test_pytest test_pylint
 
 all: venv test clean
 
 venv: venv/bin/activate
 
 venv/bin/activate: requirements.txt
-	test -d venv || virtualenv -p $(PYTHON_VER) venv
+	test -d venv || virtualenv -p $(HOST_PYTHON_VER) venv
 	$(PIP) $(PIP_FLAGS) install -Ur requirements.txt
 	touch venv/bin/activate
 
-lint:
-	pylint --rcfile=.pylintrc $(PROJECT_NAME)/*
+test_pytest:
+	$(PYTEST) --verbose --color=yes --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short $(TEST_DIR)
 
+test_pylint:
+	find $(PROJECT_NAME) -name *.py | xargs $(PYLINT) --rcfile=$(PWD)/.pylintrc
 
-test:
-	py.test --verbose --color=yes --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short \
-	--pylint --pylint-rcfile=.pylintrc tests/
+test_gen_coverage_rep:
+	$(COVERAGE) report
 
-	coverage report
+test_mypy:
+
+test: test_pytest test_pylint test_mypy test_gen_coverage_rep
+
 
 clean:
 	rm -rf htmlcov
-	rm -rf */__pycache__
-	rm -rf */__init__.pyc
-	rm -rf */*/__pycache__
 	rm -rf .coverage
 	rm -rf .cache
-
+	find $(PROJECT_NAME) -name *.pyc | xargs rm -rf
+	find $(PROJECT_NAME) -name '__pycache__' -type d | xargs rm -rf

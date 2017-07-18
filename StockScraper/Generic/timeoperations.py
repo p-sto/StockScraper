@@ -1,10 +1,11 @@
 """Stores functions related to datetime."""
 
-import pytz
 from datetime import datetime
+import pytz
 
 
 class TimeOperate:
+    """Stores functions associated with time operations."""
     # 1 day is equal to 86400000ms
     _1DAY = 86400000
     _datetime_zero_day_epoch = datetime(1970, 1, 1).replace(tzinfo=pytz.utc)

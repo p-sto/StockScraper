@@ -4,8 +4,8 @@ import os
 import logging
 
 from pathlib import Path
-from StockScraper.Generic.Configuration import get_data_from_config
-from StockScraper.Generic.Clients import get_client
+from StockScraper.Generic.configuration import get_data_from_config
+from StockScraper.Generic.clients import get_client
 
 
 def main():
