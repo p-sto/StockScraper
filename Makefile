@@ -9,6 +9,7 @@ PYTEST=$(VENV)/py.test
 PYLINT=$(VENV)/pylint
 COVERAGE=$(VENV)/coverage
 MYPY=$(VENV)/mypy
+MYPYFLAGS=--ignore-missing-imports --follow-imports=skip
 HOST_PYTHON_VER=/usr/local/bin/python3.5
 VENV_PYTHOM_VER=$(VENV)/python3
 
@@ -33,6 +34,7 @@ test_gen_coverage_rep:
 	$(COVERAGE) report
 
 test_mypy:
+	find $(PROJECT_NAME) -name *.py | xargs $(MYPY) $(MYPYFLAGS)
 
 test: test_pytest test_pylint test_mypy test_gen_coverage_rep
 
@@ -41,5 +43,7 @@ clean:
 	rm -rf htmlcov
 	rm -rf .coverage
 	rm -rf .cache
+	rm -rf .mypy_cache
 	find $(PROJECT_NAME) -name *.pyc | xargs rm -rf
 	find $(PROJECT_NAME) -name '__pycache__' -type d | xargs rm -rf
+	find $(TEST_DIR) -name '__pycache__' -type d | xargs rm -rf
