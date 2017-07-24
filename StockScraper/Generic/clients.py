@@ -3,9 +3,10 @@
 import logging
 
 from StockScraper.Clients.bankier_client import BankierClient
+from StockScraper.Generic.http_client import HTTPClient
 
 
-def get_client(client_type):
+def get_client(client_type: str) -> HTTPClient:
     """Return json configuration file.
 
     :param client_type: name of a client

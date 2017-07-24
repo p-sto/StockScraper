@@ -4,7 +4,7 @@ import os
 import json
 
 
-def get_data_from_config(path_to_config):
+def get_data_from_config(path_to_config: str) -> dict:
     """Return json representation of configuration file.
 
     :param path_to_config: path to configuration file

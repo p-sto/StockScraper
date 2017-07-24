@@ -11,7 +11,7 @@ class TimeOperate:
     _datetime_zero_day_epoch = datetime(1970, 1, 1).replace(tzinfo=pytz.utc)
 
     @staticmethod
-    def get_current_time():
+    def get_current_time() -> datetime:
         """Return current time according to host timezone.
 
         :return: datetime object.
@@ -19,7 +19,7 @@ class TimeOperate:
         return datetime.now()
 
     @staticmethod
-    def get_current_time_utc():
+    def get_current_time_utc() -> datetime:
         """Return current time in utc datetime.
 
         :return: datetime object.
@@ -27,7 +27,7 @@ class TimeOperate:
         return datetime.utcnow()
 
     @staticmethod
-    def to_utc(date):
+    def to_utc(date: datetime) -> datetime:
         """Convert date to utc.
 
         :param date: datetime object.
@@ -43,7 +43,7 @@ class TimeOperate:
         raise TypeError('Provided object is not instance of datetime.')
 
     @staticmethod
-    def datetime_to_epoch(date):
+    def datetime_to_epoch(date: datetime) -> float:
         """Convert date to unix epoch format
 
         :param date: datetime object.
@@ -54,7 +54,7 @@ class TimeOperate:
         raise TypeError('Provided object is not instance of datetime.')
 
     @classmethod
-    def days_in_epoch(cls, date):
+    def days_in_epoch(cls, date: datetime) -> int:
         """Convert date to days passed in unix epoch format.
 
         :param date: datetime object.

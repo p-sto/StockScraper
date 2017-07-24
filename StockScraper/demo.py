@@ -8,7 +8,7 @@ from StockScraper.Generic.configuration import get_data_from_config
 from StockScraper.Generic.clients import get_client
 
 
-def main():
+def main() -> None:
     """Presentation of created scrapper.
 
     :return: None
