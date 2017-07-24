@@ -1,3 +1,4 @@
+# basic:
 PROJECT_NAME=StockScraper
 PWD:=$(shell pwd)
 PYTHONPATH=$(PWD)
@@ -13,7 +14,13 @@ MYPYFLAGS=--ignore-missing-imports --follow-imports=skip
 HOST_PYTHON_VER=/usr/local/bin/python3.5
 VENV_PYTHOM_VER=$(VENV)/python3
 
-.PHONY: all venv clean test test_pytest test_pylint
+# git settings:
+GIT_COMMIT = $(shell git log -1 "--pretty=format:%H")
+GIT_STATUS = $(shell git status -sb --untracked=no | wc -l | awk '{ if($$1 == 1){ print "clean" } else { print "pending" } }')
+GIT_BRANCH = $(shell git describe --contains --all HEAD)
+
+
+.PHONY: all venv clean test test_pytest test_gen_coverage_rep test_pylint test_mypy git-status commit-id
 
 all: venv test clean
 
@@ -47,3 +54,9 @@ clean:
 	find $(PROJECT_NAME) -name *.pyc | xargs rm -rf
 	find $(PROJECT_NAME) -name '__pycache__' -type d | xargs rm -rf
 	find $(TEST_DIR) -name '__pycache__' -type d | xargs rm -rf
+
+git-status:
+	test "${GIT_STATUS}" == "clean" || (echo "GIT STATUS NOT CLEAN"; exit 1) >&2
+
+commit-id:
+	test ${GIT_COMMIT}
