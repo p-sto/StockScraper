@@ -35,13 +35,13 @@ test_pytest:
 	$(PYTEST) --verbose --color=yes --cov=$(PROJECT_NAME) --cov-report html --cov-config .coveragerc --tb=short $(TEST_DIR)
 
 test_pylint:
-	find $(PROJECT_NAME) -name *.py | xargs $(PYLINT) --rcfile=$(PWD)/.pylintrc
+	find $(PROJECT_NAME) -name '*.py' | xargs $(PYLINT) --rcfile=$(PWD)/.pylintrc
 
 test_gen_coverage_rep:
 	$(COVERAGE) report
 
 test_mypy:
-	find $(PROJECT_NAME) -name *.py | xargs $(MYPY) $(MYPYFLAGS)
+	find $(PROJECT_NAME) -name '*.py' | xargs $(MYPY) $(MYPYFLAGS)
 
 test: test_pytest test_pylint test_mypy test_gen_coverage_rep
 
@@ -51,7 +51,8 @@ clean:
 	rm -rf .coverage
 	rm -rf .cache
 	rm -rf .mypy_cache
-	find $(PROJECT_NAME) -name *.pyc | xargs rm -rf
+	find -name '$(PROJECT_NAME).log' | xargs rm -rf
+	find $(PROJECT_NAME) -name '*.pyc' | xargs rm -rf
 	find $(PROJECT_NAME) -name '__pycache__' -type d | xargs rm -rf
 	find $(TEST_DIR) -name '__pycache__' -type d | xargs rm -rf
 

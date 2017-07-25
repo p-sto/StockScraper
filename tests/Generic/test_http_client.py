@@ -4,8 +4,8 @@ import pytest
 import requests
 
 from StockScraper.Generic.exceptions import HTTPError
-from StockScraper.Generic.http_client import validate_response
-from StockScraper.Generic.http_client import HTTPClient
+from StockScraper.Clients.http_client import validate_response
+from StockScraper.Clients.http_client import HTTPClient
 
 
 def test_validate_response(mocker):

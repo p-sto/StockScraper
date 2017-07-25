@@ -2,8 +2,8 @@
 
 import logging
 
-from StockScraper.Clients.bankier_client import BankierClient
-from StockScraper.Generic.http_client import HTTPClient
+from StockScraper.Clients.BankierClient.bankier_client import BankierClient
+from StockScraper.Clients.http_client import HTTPClient
 
 
 def get_client(client_type: str) -> HTTPClient:

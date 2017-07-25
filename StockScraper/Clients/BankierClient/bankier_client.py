@@ -1,11 +1,11 @@
 """ Contains implementation of Bankier.pl client."""
 
 from datetime import timedelta, datetime
-from typing import Any, List, Dict, Optional
 
+from typing import Any, List, Dict, Optional
 from StockScraper.Generic.timeoperations import TimeOperate
-from StockScraper.Generic.http_client import HTTPClient
-from StockScraper.Generic.http_client import JSONClient
+from StockScraper.Clients.http_client import HTTPClient
+from StockScraper.Clients.http_client import JSONClient
 
 
 class BankierClient(JSONClient, HTTPClient):    # type: ignore

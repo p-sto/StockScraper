@@ -13,6 +13,7 @@ Preparation
     $ make venv
     $ source venv/bin/activate
     $ export PYTHONPATH=$PWD
+    $ export SCRAPER_HOME=$PWD
 
 
 Usage
@@ -26,4 +27,4 @@ Usage
     data = client.get_data(symbol="OPONEO.PL", days=10)
     print(data)
 
-Example can be found in StockScraper/demo.py
+Example can be found in demo.py
