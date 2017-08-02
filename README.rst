@@ -12,8 +12,7 @@ Preparation
     $ cd StockScraper
     $ make venv
     $ source venv/bin/activate
-    $ export PYTHONPATH=$PWD
-    $ export SCRAPER_HOME=$PWD
+    $ source prepare.sh
 
 
 Usage
