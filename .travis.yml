@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.5"
+# command to install dependencies
+script:
+  - make venv
+  - source venv/bin/activate
+  - source prepare.sh
+  - make test
+branches:
+  only:
+    - master
+after_success:
+  codecov

@@ -1,7 +1,8 @@
 """File contains definition of HTTP clients """
-from datetime import datetime
+import json
+import urllib.parse
 from urllib.parse import urljoin
-from typing import Any, Callable, List, Dict, Optional
+from typing import Any, Callable, List, Dict
 
 import logging
 import requests
@@ -66,12 +67,16 @@ class HTTPClient:
         return resp
 
     @staticmethod
-    def create_endpoint_url(symbol: str,
-                            date_from: Optional[datetime] = None,
-                            date_to: Optional[datetime] = None,
-                            days: Optional[int] = None) -> None:
-        """Abstract method for creating endpoint url."""
-        raise NotImplementedError
+    def create_endpoint_url(url_root: str, settings: Dict) -> str:
+        """Return generated url with declared parameters.
+
+        :param url_root: root of URL
+        :param settings: dictionary with url arguments
+        :return: concatenated URL string
+        """
+        params = urllib.parse.urlencode(settings)
+        endpoint_url = '{}?{}'.format(url_root, params)
+        return endpoint_url
 
 
 class JSONClient:   # pylint: disable=too-few-public-methods
@@ -83,4 +88,5 @@ class JSONClient:   # pylint: disable=too-few-public-methods
         :param response: response from requests
         :return: json object
         """
-        return response.json()
+        print(response.content)
+        return json.loads(response.content)

@@ -11,8 +11,10 @@ PYLINT=$(VENV)/pylint
 COVERAGE=$(VENV)/coverage
 MYPY=$(VENV)/mypy
 MYPYFLAGS=--ignore-missing-imports --follow-imports=skip
-HOST_PYTHON_VER=/usr/local/bin/python3.5
+PYTHON_VERSION=python3.5
+HOST_PYTHON_VER=$(shell echo which $(PYTHON_VERSION))
 VENV_PYTHOM_VER=$(VENV)/python3
+CODE_COV=codecov
 
 # git settings:
 GIT_COMMIT = $(shell git log -1 "--pretty=format:%H")
@@ -27,7 +29,7 @@ all: venv test clean
 venv: venv/bin/activate
 
 venv/bin/activate: requirements.txt
-	test -d venv || virtualenv -p $(HOST_PYTHON_VER) venv
+	test -d venv || virtualenv -p $(PYTHON_VERSION) venv
 	$(PIP) $(PIP_FLAGS) install -Ur requirements.txt
 	touch venv/bin/activate
 
@@ -42,6 +44,9 @@ test_gen_coverage_rep:
 
 test_mypy:
 	find $(PROJECT_NAME) -name '*.py' | xargs $(MYPY) $(MYPYFLAGS)
+
+test_codecov:
+	$(CODE_COV) --token=$(SCRAPERTOKEN)
 
 test: test_pytest test_pylint test_mypy test_gen_coverage_rep
 

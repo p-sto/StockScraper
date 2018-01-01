@@ -4,6 +4,8 @@ import configparser
 import logging
 
 from pathlib import Path
+
+from StockScraper.Clients.BankierClient.bankier_client import BankierClient
 from StockScraper.Generic.configuration import get_data_from_config
 from StockScraper.Generic.clients import get_client
 
@@ -29,12 +31,13 @@ def main() -> None:
     client_config = get_data_from_config(str(path_to_config))
 
     for host in client_config:
-        print('Loading data for host {}'.format(host))
+        logging.info('Loading data for host {}'.format(host))
         client = get_client(host)
-        for company in client_config[host]:
-            print('Working on {}'.format(company))
-            data = client.get_data(symbol=company, days=10)
-            print(data)
+        if isinstance(client, BankierClient):
+            for company_symbol in client_config[host]:
+                logging.info('Getting data for {}'.format(company_symbol))
+                data = client.get_market_data(company_symbol=company_symbol, days_back=10)
+
 
 if __name__ == '__main__':
     main()
