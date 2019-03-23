@@ -88,5 +88,4 @@ class JSONClient:   # pylint: disable=too-few-public-methods
         :param response: response from requests
         :return: json object
         """
-        print(response.content)
         return json.loads(response.content)
