@@ -53,7 +53,7 @@ class HTTPClient:
         :param endpoint: endpoint which will be called with method.
         :param args: additional arguments
         :param kwargs: additional key-worded arguments
-        :return:
+        :return: endpoint response
         """
         logging.info('Calling method %s for endpoint %s', method, endpoint)
 
