@@ -7,7 +7,7 @@
 StockScraper
 ============
 
-Repo contains scrapper for ``Bankier.py`` service which delivers online information about current stocks exchange prices on
+Repo contains scrapper for Bankier.pl site which delivers information about current stocks exchange prices on
 GPW - Polish stock exchange.
 
 
