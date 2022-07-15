@@ -1,7 +1,7 @@
 astroid==1.5.3
 certifi==2017.4.17
 chardet==3.0.3
-codecov==2.0.10
+codecov==2.0.16
 coverage==4.4.1
 decorator==4.0.11
 idna==2.5
